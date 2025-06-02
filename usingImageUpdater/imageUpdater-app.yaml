@@ -11,9 +11,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/SanjithMohanan/Flask-GLAction-Argo.git'
+    repoURL: 'https://github.com/SanjithMohanan/simpleK8s.git'
     targetRevision: HEAD
-    path: manifests
+    path: usingImageUpdater/environment/staging/my-app 
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: apps
