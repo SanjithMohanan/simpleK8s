@@ -1,7 +1,7 @@
 ---
 namespace: staging
 replicas: 
-  - name: imageUpdaterDemo
+  - name: imageupdaterdemo
     count: 2
 
 resources:
