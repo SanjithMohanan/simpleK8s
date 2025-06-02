@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: image-updater-argocd
+  namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: sanjithmohanan/ghaction:~v0.1
+  finalizers:
+    #delete the resources created by this application. Without this, the k8s resource remains
+    - resources-finalizer.argocd.argoproj.io      
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/SanjithMohanan/Flask-GLAction-Argo.git'
+    targetRevision: HEAD
+    path: manifests
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: apps
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - Validate=true
+      - CreateNamespace=false
+      - ApplyOutOfSyncOnly=true 
+      - PruneLast=true

@@ -1,0 +1,8 @@
+---
+namespace: staging
+replicas: 
+  - name: imageUpdaterDemo
+    count: 2
+
+resources:
+  - ../my-app-base

@@ -3,6 +3,9 @@ kind: Application
 metadata:
   name: sinplek8s
   namespace: argocd
+  finalizers:
+    #delete the resources created by this application. Without this, the k8s resource remains
+    - resources-finalizer.argocd.argoproj.io    
 spec:
   project: default
   source:
@@ -17,4 +20,7 @@ spec:
       prune: true
       selfHeal: true
     syncOptions:
-      - CreateNamespace=true
+      - Validate=true
+      - CreateNamespace=false
+      - ApplyOutOfSyncOnly=true 
+      - PruneLast=true
