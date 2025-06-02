@@ -4,7 +4,8 @@ metadata:
   name: image-updater-argocd
   namespace: argocd
   annotations:
-    argocd-image-updater.argoproj.io/image-list: sanjithmohanan/ghaction:~v0.1
+  # 2.x allow only minor and patch version updates
+    argocd-image-updater.argoproj.io/image-list: sanjithmohanan/ghaction:2.x
   finalizers:
     #delete the resources created by this application. Without this, the k8s resource remains
     - resources-finalizer.argocd.argoproj.io      
@@ -16,7 +17,7 @@ spec:
     path: usingImageUpdater/environment/staging/my-app 
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: apps
+    namespace: apps #will be overridden by values from kustomization.yaml
   syncPolicy:
     automated:
       prune: true

@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: sinplek8s
+  name: simplek8s-argocd
   namespace: argocd
   finalizers:
     #delete the resources created by this application. Without this, the k8s resource remains
