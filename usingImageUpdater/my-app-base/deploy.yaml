@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: imageUpdaterDemo
+  name: imageupdaterdemo
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: imageUpdaterDemo
+      app: imageupdaterdemo
   template:
     metadata:
       labels:
-        app: imageUpdaterDemo
+        app: imageupdaterdemo
     spec:
       containers:
-      - name: imageUpdaterDemo
+      - name: imageupdaterdemo
         image: sanjithmohanan/ghaction:2.3.4
         ports:
         - containerPort: 80
