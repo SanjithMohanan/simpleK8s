@@ -1,16 +1,24 @@
-# Flask-GLAction-Argo
-Learning Gitlab actions and ArgoCD
+# Flask-GLAction-ArgoCD
+To learning ArgoCD and ArgoCD ImageUpdater
 
-## What does this repo do ?
+## Install ArgoCD
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
-This is just a simple project to try out Github Actions. It also has a directory called manifests that hold K8S yaml file to deploy the docker image in a cluster.
 
-app.py - simple python webservice listening to port 5000
+## Install ImageUpdater from Helm
+helm repo add argo https://argoproj.github.io/argo-helm
+helm install my-argocd-image-updater argo/argocd-image-updater --version 0.12.2
 
-The Github Actions will: 
-* Check the linting of the code
-* Docker build
-* Docker push to docker hub
-* Update the manifests/deployment.yaml file with the new docker image tag
+## What does this directory do ?
+This directory holds yaml file to create an ArgoCD application that monitors a public docker hub image for minor and patch version changes. As soon as it detects those changes, that image will be pulled and new pods will be created.
+This also keep an eye at a public gitlab repo for changes and deploys pods based on them.
 
-The project also contains a yaml file to deploy an application to Argo which will have this repo/manifest directory as the source.
+Note:  Ofcourse it is not safe to do follow this process in Production. 
+
+### ArgoCD Write back approach
+
+"argocd-image-updater.argoproj.io/write-back-method: git" 
+can be used to write the image tag changes back to git and then ArgoCD will follow the usual process for identifying and applying git changes to K8s.
+
+Make sure to add the necessary gitlab/github secret in ArgoCD namespace for ArgoCD process to authenticate and write the changes to git.
