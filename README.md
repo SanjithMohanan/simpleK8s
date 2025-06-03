@@ -1,5 +1,5 @@
-# Flask-GLAction-ArgoCD
-To learning ArgoCD and ArgoCD ImageUpdater
+# Simplek8s
+Learning Gitlab actions and ArgoCD
 
 ## Install ArgoCD
 kubectl create namespace argocd
