@@ -1,4 +1,4 @@
-# Flask-GLAction-Argo
+# Simplek8s
 Learning Gitlab actions and ArgoCD
 
 ## What does this repo do ?
